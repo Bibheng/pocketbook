@@ -1,6 +1,6 @@
 package com.matthew.pocketbook.common.entity;
 
-import com.matthew.pocketbook.common.Constant;
+import com.matthew.pocketbook.common.constant.Constant;
 import lombok.AllArgsConstructor;
 
 /**

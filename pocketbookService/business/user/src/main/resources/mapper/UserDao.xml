@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.matthew.pocketbook.business.user.dao.UserDao">
+
+    <select id="selectOneByUserNameOrEmail" resultType="com.matthew.pocketbook.business.user.entity.User">
+        select USER_ID,
+               USER_NAME,
+               PASSWORD,
+               EMAIL,
+               CREATED_TIME,
+               LAST_LOGIN_TIME
+        from USER
+        where USER_NAME = #{userName}
+           or EMAIL = #{email}
+    </select>
+
+    <insert id="addOne">
+        insert into USER (USER_NAME, PASSWORD, EMAIL, CREATED_TIME, LAST_LOGIN_TIME)
+        VALUES (#{user.userName}, #{user.password}, #{user.email}, #{user.createdTime}, #{user.lastLoginTime})
+    </insert>
+
+</mapper>
