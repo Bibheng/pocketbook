@@ -2,7 +2,11 @@ jwtSecret: aabbccdd
 server:
   port: 8088
   servlet:
-    context-path: /pocketbook
+    context-path: /pocketbook/api
 spring:
   profiles:
     active: dev
+  application:
+    name: pocketbook
+  cache:
+    type: redis

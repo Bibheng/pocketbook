@@ -1,6 +1,7 @@
 package com.matthew.pocketbook.common.constant;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * 项目常量类
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Matthew
  * @date 2021-01-28 17:28
  **/
+@Component
 public class Constant {
     /**
      * 请求状态码：未登录
@@ -34,4 +36,22 @@ public class Constant {
      */
     @Value("jwtSecret")
     public static final String SECRET = "";
+
+    /**
+     * 是否为开发环境
+     */
+    public static boolean isDev = false;
+
+    @Value("spring.profiles.active")
+    public void setIsDev(String active) {
+        isDev = active.contains("dev");
+    }
+    /**
+     * redis 默认过期时间
+     */
+    public static final int DEFAULT_EXPIRE_TIME = 60 * 1000;
+    /**
+     * 重置密码验证码过期时间
+     */
+    public static final int RESET_PASSWORD_EXPIRE_TIME = 15 * 60 * 1000;
 }

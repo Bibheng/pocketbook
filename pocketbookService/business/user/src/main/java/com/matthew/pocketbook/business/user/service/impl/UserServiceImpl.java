@@ -7,9 +7,12 @@ import com.matthew.pocketbook.business.user.entity.RegisterParam;
 import com.matthew.pocketbook.business.user.entity.User;
 import com.matthew.pocketbook.business.user.service.UserService;
 import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.entity.MailInfo;
 import com.matthew.pocketbook.common.exception.CustomException;
 import com.matthew.pocketbook.common.util.HashUtil;
 import com.matthew.pocketbook.common.util.JWTUtil;
+import com.matthew.pocketbook.common.util.RedisUtil;
+import com.matthew.pocketbook.common.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -72,9 +75,42 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("用户不存在");
         }
         // todo:增加验证码校验
+        String redisKey = getResetAuthCodeKey(param.getEmail());
+        String authCode = RedisUtil.get(redisKey, String.class);
+        if (StringUtil.isEmpty(authCode) || !authCode.equals(param.getAuthCode())) {
+            throw new CustomException("验证码错误");
+        }
+        RedisUtil.delete(redisKey);
         String newPassword = HashUtil.sha1(HashUtil.md5(param.getPassword()));
         userDao.updatePassword(param.getEmail(), newPassword);
     }
 
+    /**
+     * 生成重置密码缓存key
+     *
+     * @param email 用户邮箱
+     * @return java.lang.String
+     * @author Matthew
+     * @date 2021-02-22 16:23
+     */
+    private String getResetAuthCodeKey(String email) {
+        return email + "_authCode";
+    }
+
+
+    @Override
+    public void sendAuthCode(String email) {
+        MailInfo mailInfo = new MailInfo();
+        mailInfo.setReceiver(email);
+        mailInfo.setSubject("记账本 验证码");
+        String authCode = StringUtil.getRandomString(6, 2);
+        mailInfo.setContent("记账本，本次验证码：" + authCode);
+        if (Constant.isDev) {
+            authCode = "123456";
+        } else {
+            //todo: 增加右键发送功能
+        }
+        RedisUtil.set(getResetAuthCodeKey(email), authCode, Constant.RESET_PASSWORD_EXPIRE_TIME);
+    }
 
 }

@@ -18,7 +18,7 @@ public class HashUtil {
      * @date 2021-01-29 10:47
      */
     public static String md5(String str) {
-        if (StringUtils.isEmpty(str)) {
+        if (StringUtil.isEmpty(str)) {
             return "";
         }
         return DigestUtils.md5Hex(str);
@@ -33,7 +33,7 @@ public class HashUtil {
      * @date 2021-01-29 10:47
      */
     public static String sha1(String str) {
-        if (StringUtils.isEmpty(str)) {
+        if (StringUtil.isEmpty(str)) {
             return "";
         }
         return DigestUtils.sha1Hex(str);

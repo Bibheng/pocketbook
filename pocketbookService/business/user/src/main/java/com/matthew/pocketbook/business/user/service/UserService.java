@@ -40,4 +40,13 @@ public interface UserService {
      * @date 2021-02-04 09:51
      */
     void resetPassword(RegisterParam param);
+
+    /**
+     * 发送验证码
+     *
+     * @param email 邮箱
+     * @author Matthew
+     * @date 2021-02-22 16:44
+     */
+    void sendAuthCode(String email);
 }
