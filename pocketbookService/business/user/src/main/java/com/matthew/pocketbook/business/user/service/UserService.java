@@ -3,7 +3,6 @@ package com.matthew.pocketbook.business.user.service;
 import com.matthew.pocketbook.business.user.entity.LoginParam;
 import com.matthew.pocketbook.business.user.entity.LoginRes;
 import com.matthew.pocketbook.business.user.entity.RegisterParam;
-import org.springframework.stereotype.Service;
 
 /**
  * 用户管理接口
