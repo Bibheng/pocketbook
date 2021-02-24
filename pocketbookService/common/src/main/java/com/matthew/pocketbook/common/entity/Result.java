@@ -2,6 +2,7 @@ package com.matthew.pocketbook.common.entity;
 
 import com.matthew.pocketbook.common.constant.Constant;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 /**
  * 后端返回包装类
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
  * @author Matthew
  * @date 2021-01-28 17:15
  **/
+@Data
 @AllArgsConstructor
 public class Result {
     /**
