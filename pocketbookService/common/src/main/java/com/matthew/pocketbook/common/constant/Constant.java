@@ -34,7 +34,7 @@ public class Constant {
     /**
      * token密钥
      */
-    @Value("jwtSecret")
+    @Value("${jwtSecret}")
     public static final String SECRET = "";
 
     /**
@@ -42,7 +42,7 @@ public class Constant {
      */
     public static boolean isDev = false;
 
-    @Value("spring.profiles.active")
+    @Value("${spring.profiles.active}")
     public void setIsDev(String active) {
         isDev = active.contains("dev");
     }

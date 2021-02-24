@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
  * @author Matthew
  * @date 2021-01-28 22:27
  **/
-@Service
 public interface UserService {
 
     /**

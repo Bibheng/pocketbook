@@ -9,11 +9,9 @@ import com.matthew.pocketbook.business.user.service.UserService;
 import com.matthew.pocketbook.common.constant.Constant;
 import com.matthew.pocketbook.common.entity.MailInfo;
 import com.matthew.pocketbook.common.exception.CustomException;
-import com.matthew.pocketbook.common.util.HashUtil;
-import com.matthew.pocketbook.common.util.JWTUtil;
-import com.matthew.pocketbook.common.util.RedisUtil;
-import com.matthew.pocketbook.common.util.StringUtil;
+import com.matthew.pocketbook.common.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +22,7 @@ import java.util.Map;
  * @author Matthew
  * @date 2021-01-28 22:43
  **/
-
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -74,7 +72,6 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new CustomException("用户不存在");
         }
-        // todo:增加验证码校验
         String redisKey = getResetAuthCodeKey(param.getEmail());
         String authCode = RedisUtil.get(redisKey, String.class);
         if (StringUtil.isEmpty(authCode) || !authCode.equals(param.getAuthCode())) {
@@ -108,7 +105,7 @@ public class UserServiceImpl implements UserService {
         if (Constant.isDev) {
             authCode = "123456";
         } else {
-            //todo: 增加右键发送功能
+            MailUtil.sendTextMail(mailInfo);
         }
         RedisUtil.set(getResetAuthCodeKey(email), authCode, Constant.RESET_PASSWORD_EXPIRE_TIME);
     }
