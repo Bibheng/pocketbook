@@ -3,6 +3,7 @@ package com.matthew.pocketbook.common.util;
 import com.matthew.pocketbook.common.entity.MailInfo;
 import com.matthew.pocketbook.common.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,6 +19,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MailUtil {
     private static JavaMailSender mailSender;
+
+    @Autowired
+    public void setMailSender(JavaMailSender mailSender) {
+        MailUtil.mailSender = mailSender;
+    }
 
     /**
      * 发件人

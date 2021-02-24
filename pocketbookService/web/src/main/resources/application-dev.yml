@@ -47,15 +47,15 @@ spring:
     host:
     username:
     password:
-    port:
-    protocol:
-    default-encoding: utf-8
+    port: 465
     properties:
       mail:
-        debug: true
-        stmp:
+        smtp:
+          auth: true
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

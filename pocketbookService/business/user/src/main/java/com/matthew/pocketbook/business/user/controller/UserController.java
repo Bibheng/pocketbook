@@ -41,7 +41,7 @@ public class UserController {
         return Result.success(null);
     }
 
-    @GetMapping("sendAuthCode")
+    @GetMapping("/sendAuthCode")
     public Result sendAuthCode(@Param("email") String email) {
         userService.sendAuthCode(email);
         return Result.success(null);
