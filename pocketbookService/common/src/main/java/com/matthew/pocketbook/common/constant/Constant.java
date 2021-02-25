@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Constant {
     /**
+     * jwt key
+     */
+    public static final String JWT_KEY = "jwt-token";
+    /**
      * 请求状态码：未登录
      */
     public static final int UNAUTHORIZED_CODE = -1;

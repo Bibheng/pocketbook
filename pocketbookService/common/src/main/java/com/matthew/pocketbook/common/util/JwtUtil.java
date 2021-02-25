@@ -17,7 +17,7 @@ import java.util.Map;
  * @author Matthew
  * @date 2021-01-28 18:24
  **/
-public class JWTUtil {
+public class JwtUtil {
     /**
      * 加密生成jwt
      *

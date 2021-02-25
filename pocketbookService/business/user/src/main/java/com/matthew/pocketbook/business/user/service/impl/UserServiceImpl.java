@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserService {
             || !HashUtil.sha1(HashUtil.md5(param.getPassword())).equals(param.getPassword())) {
             throw new CustomException("账号或密码错误");
         }
-        Map map = new HashMap<String, String>(1);
-        map.put("userId", String.valueOf(user.getUserId()));
-        String token = JWTUtil.encode(map, Constant.SECRET, param.isRememberMe() ? Constant.LONG_EXPIRE_TIME : Constant.SHORT_EXPIRE_TIME);
+        Map map = new HashMap<String, Integer>(1);
+        map.put("userId", user.getUserId());
+        String token = JwtUtil.encode(map, Constant.SECRET, param.isRememberMe() ? Constant.LONG_EXPIRE_TIME : Constant.SHORT_EXPIRE_TIME);
         userDao.updateLastLoginTime(user.getUserId(), System.currentTimeMillis());
         return LoginRes.builder()
             .token(token)
