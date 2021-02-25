@@ -6,10 +6,7 @@ import com.matthew.pocketbook.business.user.service.UserService;
 import com.matthew.pocketbook.common.entity.Result;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户控制器
@@ -24,18 +21,18 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody LoginParam loginParam) {
         return Result.success(userService.login(loginParam));
     }
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public Result register(@RequestBody RegisterParam registerParam) {
         userService.register(registerParam);
         return Result.success(null);
     }
 
-    @RequestMapping("/resetPassword")
+    @PostMapping("/resetPassword")
     public Result resetPassword(@RequestBody RegisterParam resetParam) {
         userService.resetPassword(resetParam);
         return Result.success(null);
