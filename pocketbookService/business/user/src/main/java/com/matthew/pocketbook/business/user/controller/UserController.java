@@ -26,13 +26,13 @@ public class UserController {
         return Result.success(userService.login(loginParam));
     }
 
-    @PostMapping("/register")
+    @PostMapping("")
     public Result register(@RequestBody RegisterParam registerParam) {
         userService.register(registerParam);
         return Result.success(null);
     }
 
-    @PostMapping("")
+    @PostMapping("/resetPassword")
     public Result resetPassword(@RequestBody RegisterParam resetParam) {
         userService.resetPassword(resetParam);
         return Result.success(null);
