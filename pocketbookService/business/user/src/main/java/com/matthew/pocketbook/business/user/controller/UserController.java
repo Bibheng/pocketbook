@@ -32,13 +32,13 @@ public class UserController {
         return Result.success(null);
     }
 
-    @PostMapping("/resetPassword")
+    @PostMapping("")
     public Result resetPassword(@RequestBody RegisterParam resetParam) {
         userService.resetPassword(resetParam);
         return Result.success(null);
     }
 
-    @GetMapping("/sendAuthCode")
+    @GetMapping("/authCode")
     public Result sendAuthCode(@Param("email") String email) {
         userService.sendAuthCode(email);
         return Result.success(null);

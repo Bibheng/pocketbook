@@ -38,7 +38,7 @@ import java.util.Map;
 @Slf4j
 public class LoginFilter implements Filter {
 
-    @Value("server.servlet.context-path")
+    @Value("${server.servlet.context-path}")
     private String urlPrefix;
 
     private static AntPathMatcher matcher = new AntPathMatcher();
