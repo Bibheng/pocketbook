@@ -28,7 +28,7 @@ public class JwtUtil {
      * @author Matthew
      * @date 2021-01-28 19:00
      */
-    public static String encode(Map<String, String> map, String secret, long timeOut) {
+    public static String encode(Map<String, Integer> map, String secret, long timeOut) {
         // 失效时间
         Date invalidTime = new Date(System.currentTimeMillis() + timeOut);
         // 私钥加密

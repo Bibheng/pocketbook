@@ -35,7 +35,7 @@ public class User {
     /**
      * 创建时间
      */
-    private long createTime;
+    private long createdTime;
     /**
      * 最新登录时间
      */

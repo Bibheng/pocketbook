@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
             || !HashUtil.sha1(HashUtil.md5(param.getPassword())).equals(param.getPassword())) {
             throw new CustomException("账号或密码错误");
         }
-        Map map = new HashMap<String, Integer>(1);
+        Map<String, Integer> map = new HashMap<>(1);
         map.put("userId", user.getUserId());
         String token = JwtUtil.encode(map, Constant.SECRET, param.isRememberMe() ? Constant.LONG_EXPIRE_TIME : Constant.SHORT_EXPIRE_TIME);
         userDao.updateLastLoginTime(user.getUserId(), System.currentTimeMillis());
@@ -51,17 +51,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(RegisterParam param) {
         User user = userDao.selectOneByUserNameOrEmail(param.getUserName(), param.getEmail());
-        if (user.getUserName().equals(param.getUserName())) {
-            throw new CustomException("用户名已经注册");
+        if (user != null) {
+            if (user.getUserName().equals(param.getUserName())) {
+                throw new CustomException("用户名已经注册");
+            }
+            if (user.getEmail().equals(param.getEmail())) {
+                throw new CustomException("邮箱已注册");
+            }
         }
-        if (user.getEmail().equals(param.getEmail())) {
-            throw new CustomException("邮箱已注册");
-        }
-        User.builder()
-            .userName(user.getUserName())
-            .email(user.getEmail())
-            .password(HashUtil.sha1(HashUtil.md5(user.getPassword())))
-            .createTime(System.currentTimeMillis())
+        user = User.builder()
+            .userName(param.getUserName())
+            .email(param.getEmail())
+            .password(HashUtil.sha1(HashUtil.md5(param.getPassword())))
+            .createdTime(System.currentTimeMillis())
             .build();
         userDao.addOne(user);
     }

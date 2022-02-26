@@ -26,7 +26,7 @@ public class UserController {
         return Result.success(userService.login(loginParam));
     }
 
-    @PostMapping("")
+    @PutMapping("")
     public Result register(@RequestBody RegisterParam registerParam) {
         userService.register(registerParam);
         return Result.success(null);
