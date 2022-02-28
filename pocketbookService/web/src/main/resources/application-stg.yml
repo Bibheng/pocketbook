@@ -1,8 +1,8 @@
 spring:
   datasource:  #数据源
     url: jdbc:mysql://127.0.0.1:3306/pocketbook?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: xiaoguoguo
+    username: pocketbookdata
+    password:
     driverClassName: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
