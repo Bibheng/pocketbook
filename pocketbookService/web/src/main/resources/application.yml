@@ -10,3 +10,8 @@ spring:
     name: pocketbook
   cache:
     type: redis
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # classpath后面加*，值里面的*才起作用
+  mapper-locations: classpath*:mapper/*.xml

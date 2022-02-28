@@ -1,8 +1,8 @@
 spring:
   datasource:  #数据源
     url: jdbc:mysql://127.0.0.1:3306/pocketbook?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: pocketbookdata
-    password: Pocket123*
+    username: root
+    password: xiaoguoguo
     driverClassName: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
@@ -44,8 +44,8 @@ spring:
         # 连接池最小空闲连接数
         min-idle: 2
   mail:
-    host:
-    username:
+    host: smtp.qq.com
+    username: 395040955@qq.com
     password:
     port: 465
     properties:
@@ -56,9 +56,4 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
           starttls:
             enable: true
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  # classpath后面加*，值里面的*才起作用
-  mapper-locations: classpath*:mapper/*.xml
 debug: false
