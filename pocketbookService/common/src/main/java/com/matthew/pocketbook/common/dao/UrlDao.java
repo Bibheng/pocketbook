@@ -15,6 +15,6 @@ import java.util.List;
 @Component
 public interface UrlDao {
 
-    @Select("select URL_ID urlId, METHOD, URL from URL")
+    @Select("select url_id urlId, method, url from url")
     List<Url> getPublicUrl();
 }
