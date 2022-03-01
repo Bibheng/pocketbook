@@ -14,6 +14,10 @@
  Date: 27/02/2022 01:08:10
 */
 
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`pocketbook` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `pocketbook`;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
