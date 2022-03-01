@@ -38,8 +38,12 @@ public class Constant {
     /**
      * token密钥
      */
+    public static String SECRET = "";
+
     @Value("${jwtSecret}")
-    public static final String SECRET = "";
+    public void setSecret(String secret) {
+        SECRET = secret;
+    }
 
     /**
      * 是否为开发环境

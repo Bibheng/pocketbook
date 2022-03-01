@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         User user = userDao.selectOneByUserNameOrEmail(param.getLoginCode(), param.getLoginCode());
         // 先md5加密后再sha1加密，降低sha1加密是的哈希碰撞
         if (user == null
-            || !HashUtil.sha1(HashUtil.md5(param.getPassword())).equals(param.getPassword())) {
+            || !HashUtil.sha1(HashUtil.md5(param.getPassword())).equals(user.getPassword())) {
             throw new CustomException("账号或密码错误");
         }
         Map<String, Integer> map = new HashMap<>(1);

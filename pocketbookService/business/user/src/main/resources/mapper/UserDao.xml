@@ -10,13 +10,13 @@
                created_time,
                last_login_time
         from user
-        where user_name = #{username}
+        where user_name = #{userName}
            or email = #{email}
     </select>
 
     <insert id="addOne">
         insert into user (user_name, password, email, created_time, last_login_time)
-        values (#{user.username}, #{user.password}, #{user.email}, #{user.createdtime}, #{user.lastlogintime})
+        values (#{user.userName}, #{user.password}, #{user.email}, #{user.createdTime}, #{user.lastLoginTime})
     </insert>
 
 </mapper>

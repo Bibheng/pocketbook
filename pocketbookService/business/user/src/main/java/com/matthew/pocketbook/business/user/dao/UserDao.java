@@ -32,7 +32,7 @@ public interface UserDao {
      * @author Matthew
      * @date 2021-01-29 11:14
      */
-    @Update("update user set lastLoginTime = #{time} where userId = #{userId}")
+    @Update("update user set last_login_time = #{time} where user_id = #{userId}")
     void updateLastLoginTime(@Param("userId") int userId, @Param("time") long time);
 
     /**
