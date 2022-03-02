@@ -50,14 +50,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(RegisterParam param) {
-        User user = userDao.selectOneByUserNameOrEmail(param.getUserName(), param.getEmail());
+        User user = userDao.selectOneByUserNameOrEmail(param.getUserName(), param.getUserName());
         if (user != null) {
-            if (user.getUserName().equals(param.getUserName())) {
-                throw new CustomException("用户名已经注册");
-            }
-            if (user.getEmail().equals(param.getEmail())) {
-                throw new CustomException("邮箱已注册");
-            }
+            throw new CustomException("用户名已经注册");
+        }
+        user = userDao.selectOneByUserNameOrEmail(param.getEmail(), param.getEmail());
+        if (user != null) {
+            throw new CustomException("邮箱已注册");
         }
         user = User.builder()
             .userName(param.getUserName())
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void resetPassword(RegisterParam param) {
-        User user = userDao.selectOneByUserNameOrEmail(param.getUserName(), param.getEmail());
+        User user = userDao.selectOneByUserNameAndEmail(param.getUserName(), param.getEmail());
         if (user == null) {
             throw new CustomException("用户不存在");
         }

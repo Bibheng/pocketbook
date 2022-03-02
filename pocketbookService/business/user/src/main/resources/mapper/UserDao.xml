@@ -14,6 +14,18 @@
            or email = #{email}
     </select>
 
+    <select id="selectOneByUserNameAndEmail" resultType="com.matthew.pocketbook.business.user.entity.User">
+        select user_id,
+               user_name,
+               password,
+               email,
+               created_time,
+               last_login_time
+        from user
+        where user_name = #{userName}
+           and email = #{email}
+    </select>
+
     <insert id="addOne">
         insert into user (user_name, password, email, created_time, last_login_time)
         values (#{user.userName}, #{user.password}, #{user.email}, #{user.createdTime}, #{user.lastLoginTime})

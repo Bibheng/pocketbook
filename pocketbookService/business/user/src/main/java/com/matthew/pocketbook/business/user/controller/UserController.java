@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * 用户控制器
  *
@@ -22,18 +24,18 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/login")
-    public Result login(@RequestBody LoginParam loginParam) {
+    public Result login(@RequestBody @Valid LoginParam loginParam) {
         return Result.success(userService.login(loginParam));
     }
 
     @PutMapping("")
-    public Result register(@RequestBody RegisterParam registerParam) {
+    public Result register(@RequestBody @Valid RegisterParam registerParam) {
         userService.register(registerParam);
         return Result.success(null);
     }
 
     @PostMapping("/resetPassword")
-    public Result resetPassword(@RequestBody RegisterParam resetParam) {
+    public Result resetPassword(@RequestBody @Valid RegisterParam resetParam) {
         userService.resetPassword(resetParam);
         return Result.success(null);
     }

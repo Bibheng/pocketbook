@@ -25,6 +25,16 @@ public interface UserDao {
     User selectOneByUserNameOrEmail(@Param("userName") String userName, @Param("email") String email);
 
     /**
+     * 根据用户和密码指定唯一用户
+     *
+     * @param userName 用户名称
+     * @param email 用户邮箱
+     * @author Matthew
+     * @date 2022-03-02 23:37
+     */
+    User selectOneByUserNameAndEmail(@Param("userName") String userName, @Param("email") String email);
+
+    /**
      * 根据用户id更新最新登录时间
      *
      * @param userId 用户id
