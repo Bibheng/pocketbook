@@ -3,9 +3,11 @@ package com.matthew.pocketbook.business.user.controller;
 import com.matthew.pocketbook.business.user.entity.LoginParam;
 import com.matthew.pocketbook.business.user.entity.RegisterParam;
 import com.matthew.pocketbook.business.user.service.UserService;
+import com.matthew.pocketbook.common.annotation.Group;
 import com.matthew.pocketbook.common.entity.Result;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,13 +31,13 @@ public class UserController {
     }
 
     @PutMapping("")
-    public Result register(@RequestBody @Valid RegisterParam registerParam) {
+    public Result register(@RequestBody @Validated({Group.Add.class}) RegisterParam registerParam) {
         userService.register(registerParam);
         return Result.success(null);
     }
 
     @PostMapping("/resetPassword")
-    public Result resetPassword(@RequestBody @Valid RegisterParam resetParam) {
+    public Result resetPassword(@RequestBody @Validated(Group.Update.class) RegisterParam resetParam) {
         userService.resetPassword(resetParam);
         return Result.success(null);
     }

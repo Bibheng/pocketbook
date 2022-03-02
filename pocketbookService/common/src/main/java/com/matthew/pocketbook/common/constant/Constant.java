@@ -24,7 +24,7 @@ public class Constant {
      */
     public static final int SUCCESS_CODE = 200;
     /**
-     * 请求状态码：失败
+     * 请求状态码：服务器异常
      */
     public static final int ERROR_CODE = 500;
     /**
