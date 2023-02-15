@@ -1,6 +1,7 @@
 package com.matthew.pocketbook.common.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 字符串工具类
@@ -31,7 +32,7 @@ public class StringUtil {
      * 生成随机字符串
      *
      * @param length 字符串长度
-     * @param mode 字符串模式 0/数字字符混合，1/字符，2/数字
+     * @param mode   字符串模式 0/数字字符混合，1/字符，2/数字
      * @return java.lang.String
      * @author Matthew
      * @date 2021-02-22 17:10
@@ -56,5 +57,14 @@ public class StringUtil {
      */
     public static int getRandomNumber(int min, int max) {
         return (int) (min + rand.nextInt(max - min + 1));
+    }
+
+    /**
+     * 生成UUID
+     * @param isContainsHyphen true带连接符，false不带连接符
+     * @return
+     */
+    public static String getUUID(boolean isContainsHyphen) {
+        return isContainsHyphen ? UUID.randomUUID().toString() : UUID.randomUUID().toString().replace("-", "");
     }
 }

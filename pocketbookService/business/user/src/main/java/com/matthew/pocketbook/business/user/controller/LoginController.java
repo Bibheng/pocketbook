@@ -2,7 +2,7 @@ package com.matthew.pocketbook.business.user.controller;
 
 import com.matthew.pocketbook.business.user.entity.LoginParam;
 import com.matthew.pocketbook.business.user.entity.RegisterParam;
-import com.matthew.pocketbook.business.user.service.UserService;
+import com.matthew.pocketbook.business.user.service.LoginService;
 import com.matthew.pocketbook.common.annotation.Group;
 import com.matthew.pocketbook.common.entity.Result;
 import org.apache.ibatis.annotations.Param;
@@ -20,31 +20,31 @@ import javax.validation.Valid;
  **/
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class LoginController {
 
     @Autowired
-    UserService userService;
+    LoginService loginService;
 
     @PostMapping("/login")
     public Result login(@RequestBody @Valid LoginParam loginParam) {
-        return Result.success(userService.login(loginParam));
+        return Result.success(loginService.login(loginParam));
     }
 
     @PutMapping("")
     public Result register(@RequestBody @Validated({Group.Add.class}) RegisterParam registerParam) {
-        userService.register(registerParam);
+        loginService.register(registerParam);
         return Result.success(null);
     }
 
     @PostMapping("/resetPassword")
     public Result resetPassword(@RequestBody @Validated(Group.Update.class) RegisterParam resetParam) {
-        userService.resetPassword(resetParam);
+        loginService.resetPassword(resetParam);
         return Result.success(null);
     }
 
     @GetMapping("/authCode")
     public Result sendAuthCode(@Param("email") String email) {
-        userService.sendAuthCode(email);
+        loginService.sendAuthCode(email);
         return Result.success(null);
     }
 

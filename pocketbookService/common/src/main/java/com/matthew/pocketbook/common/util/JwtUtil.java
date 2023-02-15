@@ -6,7 +6,10 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.entity.UserContext;
 import com.matthew.pocketbook.common.exception.CustomException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.Map;
@@ -17,6 +20,7 @@ import java.util.Map;
  * @author Matthew
  * @date 2021-01-28 18:24
  **/
+@Slf4j
 public class JwtUtil {
     /**
      * 加密生成jwt
@@ -58,5 +62,23 @@ public class JwtUtil {
         JWTVerifier jwtVerifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = jwtVerifier.verify(token);
         return decodedJWT.getClaims();
+    }
+
+    public static boolean checkUserJwt(String userJwt) {
+        if (StringUtil.isEmpty(userJwt)) {
+            log.error("jwt为空");
+            return false;
+        }
+        try {
+            Map<String, Claim> map = JwtUtil.decode(userJwt, Constant.SECRET);
+            int userId = Integer.parseInt(map.get(Constant.MDC_USER_ID).asString());
+            UserContext userContext = new UserContext();
+            userContext.setUserId(userId);
+            UserContextHolder.set(userContext);
+            return true;
+        } catch (Exception e) {
+            log.error("jwt解密失败：{},原因：{}", userJwt, e.getMessage());
+            return false;
+        }
     }
 }
