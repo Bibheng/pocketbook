@@ -17,7 +17,7 @@ public interface UserDao {
      * 根据用户名或邮箱查询用户信息
      *
      * @param userName 用户名
-     * @param email 邮箱
+     * @param email    邮箱
      * @return com.matthew.pocketbook.business.user.entity.User
      * @author Matthew
      * @date 2021-01-28 23:03
@@ -28,7 +28,7 @@ public interface UserDao {
      * 根据用户和密码指定唯一用户
      *
      * @param userName 用户名称
-     * @param email 用户邮箱
+     * @param email    用户邮箱
      * @author Matthew
      * @date 2022-03-02 23:37
      */
@@ -38,7 +38,7 @@ public interface UserDao {
      * 根据用户id更新最新登录时间
      *
      * @param userId 用户id
-     * @param time 登录时间
+     * @param time   登录时间
      * @author Matthew
      * @date 2021-01-29 11:14
      */
@@ -57,7 +57,7 @@ public interface UserDao {
     /**
      * 更新密码
      *
-     * @param email 用户邮箱
+     * @param email       用户邮箱
      * @param newPassword 新密码
      * @author Matthew
      * @date 2021-02-04 10:10

@@ -51,7 +51,8 @@ public interface UserService {
 
     /**
      * 根据邮箱重制密码
-     * @param email 邮箱
+     *
+     * @param email       邮箱
      * @param newPassword 新密码
      */
     void updatePassword(String email, String newPassword);

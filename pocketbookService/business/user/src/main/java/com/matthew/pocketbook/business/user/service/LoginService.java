@@ -21,6 +21,7 @@ public interface LoginService {
      * @date 2021-01-28 22:36
      */
     LoginRes login(LoginParam param);
+
     /**
      * 注册接口
      *
