@@ -11,4 +11,5 @@ import lombok.Data;
 @Data
 public class UserContext {
     private int userId;
+    private String requestId;
 }

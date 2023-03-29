@@ -1,4 +1,4 @@
-package com.matthew.pocketbook.business.user.dao;
+package com.matthew.pocketbook.business.user.mapper;
 
 import com.matthew.pocketbook.business.user.entity.User;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @date 2021-01-28 22:46
  **/
 @Repository
-public interface UserDao {
+public interface UserMapper {
     /**
      * 根据用户名或邮箱查询用户信息
      *

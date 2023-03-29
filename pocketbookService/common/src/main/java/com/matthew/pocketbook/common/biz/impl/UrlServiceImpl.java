@@ -1,7 +1,7 @@
 package com.matthew.pocketbook.common.biz.impl;
 
 import com.matthew.pocketbook.common.biz.UrlService;
-import com.matthew.pocketbook.common.dao.UrlDao;
+import com.matthew.pocketbook.common.mapper.UrlMapper;
 import com.matthew.pocketbook.common.entity.Url;
 import com.matthew.pocketbook.common.filter.LoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UrlServiceImpl implements UrlService {
     private static volatile List<Url> publicUrl;
 
     @Autowired
-    private UrlDao urlDao;
+    private UrlMapper urlMapper;
 
     private static AntPathMatcher matcher = new AntPathMatcher();
 
@@ -41,7 +41,7 @@ public class UrlServiceImpl implements UrlService {
         if (publicUrl == null) {
             synchronized (LoginFilter.class) {
                 if (publicUrl == null) {
-                    publicUrl = urlDao.getPublicUrl();
+                    publicUrl = urlMapper.getPublicUrl();
                 }
             }
         }

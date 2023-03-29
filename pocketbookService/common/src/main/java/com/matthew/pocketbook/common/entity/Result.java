@@ -1,6 +1,7 @@
 package com.matthew.pocketbook.common.entity;
 
 import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.util.UserContextHolder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -34,6 +35,7 @@ public class Result {
         this.code = code;
         this.message = message;
         this.data = data;
+        this.requestId = UserContextHolder.get().getRequestId();
     }
 
     public static Result unAuth() {

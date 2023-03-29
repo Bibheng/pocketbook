@@ -72,8 +72,9 @@ public class JwtUtil {
         try {
             Map<String, Claim> map = JwtUtil.decode(userJwt, Constant.SECRET);
             int userId = Integer.parseInt(map.get(Constant.MDC_USER_ID).asString());
-            UserContext userContext = new UserContext();
+            UserContext userContext = UserContextHolder.get();
             userContext.setUserId(userId);
+            MDCUtil.putUserId(String.valueOf(userId));
             UserContextHolder.set(userContext);
             return true;
         } catch (Exception e) {

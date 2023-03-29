@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @date 2021-01-28 16:35
  **/
 @SpringBootApplication(scanBasePackages = {"com.matthew.pocketbook"})
-@MapperScan(basePackages = "com.matthew.pocketbook.**.dao")
+@MapperScan(basePackages = "com.matthew.pocketbook.**.mapper")
 @EnableTransactionManagement
 public class WebApplication {
 

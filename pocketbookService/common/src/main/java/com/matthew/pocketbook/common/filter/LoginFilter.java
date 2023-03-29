@@ -4,9 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.matthew.pocketbook.common.biz.UrlService;
 import com.matthew.pocketbook.common.constant.Constant;
 import com.matthew.pocketbook.common.entity.Result;
+import com.matthew.pocketbook.common.entity.UserContext;
 import com.matthew.pocketbook.common.util.JwtUtil;
+import com.matthew.pocketbook.common.util.MDCUtil;
+import com.matthew.pocketbook.common.util.StringUtil;
 import com.matthew.pocketbook.common.util.UserContextHolder;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -48,27 +52,41 @@ public class LoginFilter implements Filter {
         // 响应头设置
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,jwt-token");
 
-        // 1、放行静态文件
-        if (requestUrl.startsWith("/static")) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
 
-        // 2、放行Options请求
-        String requestMethod = request.getMethod();
-        if (requestMethod.equalsIgnoreCase(HttpMethod.OPTIONS.name())) {
-            response.setStatus(HttpStatus.OK.value());
-            return;
-        }
-
-        // 3、放行公共请求url 比如登录注册等
-        if (urlService.isPublicUrl(requestUrl, requestMethod)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
-
-        // 4、校验jwt是否合法
         try {
+            UserContext userContext = new UserContext();
+            userContext.setRequestId(StringUtil.getUUID(false));
+            MDCUtil.putRequestId(userContext.getRequestId());
+            UserContextHolder.set(userContext);
+
+
+            // 1、放行静态文件
+            if (requestUrl.startsWith("/static")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }
+
+            // 2、放行Options请求
+            String requestMethod = request.getMethod();
+            if (requestMethod.equalsIgnoreCase(HttpMethod.OPTIONS.name())) {
+                response.setStatus(HttpStatus.OK.value());
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }
+
+            // 3、放行公共请求url 比如登录注册等
+            if (urlService.isPublicUrl(requestUrl, requestMethod)) {
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }
+
+            // 4、免登录标识校验
+            if (request.getHeader("Login-Free").equals("1")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }
+
+            // 5、校验jwt是否合法
             if (JwtUtil.checkUserJwt(request.getHeader(Constant.JWT_KEY))) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
@@ -78,7 +96,8 @@ public class LoginFilter implements Filter {
                 response.getWriter().write(JSON.toJSONString(Result.unAuth()));
             }
         } finally {
-            UserContextHolder.remove();// 执行完servlet后释放threadLocal，避免内存溢出
+            UserContextHolder.remove();// 执行完ser
+            MDCUtil.clear();// vlet后释放threadLocal，避免内存溢出
         }
     }
 

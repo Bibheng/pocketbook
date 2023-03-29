@@ -28,6 +28,11 @@ public class Constant {
      */
     public static final String MDC_USER_ID = "userId";
 
+    /**
+     * MDC中请求id的key
+     */
+    public static final String MDC_REQUEST_ID = "requestId";
+
     /*请求码相关*/
     /**
      * 请求状态码：未登录

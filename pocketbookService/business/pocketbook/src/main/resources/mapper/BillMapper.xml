@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.matthew.pocketbook.business.pocketbook.mapper.BillMapper">
+
+    <select id="queryBillListByParam" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam"
+            resultType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
+        select
+        bill_id, bill_type, money, created_date, created_by, payer, payee, pay_type, pay_date
+        from bill
+        <where>
+            1=1
+            <if test="param.billIds != null and param.billIds.size() > 0">
+                and bill_id in
+                <foreach collection="param.billIds" item="billId" open="(" close=")" separator=",">
+                    #{billId}
+                </foreach>
+            </if>
+            <if test="param.billType != null and param.billType != ''">
+                and bill_type = #{param.billType}
+            </if>
+            <if test="param.moneyBegin != null">
+                and money > #{param.moneyBegin}
+            </if>
+            <if test="param.moneyEnd != null">
+                and money &lt; #{param.moneyEnd}
+            </if>
+            <if test="param.createdDateBegin != null">
+                and created_date >= #{param.createdDateBegin}
+            </if>
+            <if test="param.createdDateEnd != null">
+                and created_date &lt;= #{param.createdDateEnd}
+            </if>
+            <if test="param.createdBys != null and param.createdBys.size() > 0">
+                and created_by in
+                <foreach collection="param.createdBys" item="createdBy" open="(" close=")" separator=",">
+                    #{createdBy}
+                </foreach>
+            </if>
+            <if test="param.createdBy != null and param.createdBy != ''">
+                and created_by like '%${param.createdBy}%'
+            </if>
+            <if test="param.payers != null and param.payers.size() > 0">
+                and payer in
+                <foreach collection="param.payers" item="payer" open="(" close=")" separator=",">
+                    #{payer}
+                </foreach>
+            </if>
+            <if test="param.payer != null and param.payer != ''">
+                and payer like '%${param.payer}%'
+            </if>
+            <if test="param.payees != null and param.payees.size() > 0">
+                and payee in
+                <foreach collection="param.payees" item="payee" open="(" close=")" separator=",">
+                    #{payee}
+                </foreach>
+            </if>
+            <if test="param.payee != null and param.payee != ''">
+                and payer like '%${param.payee}%'
+            </if>
+            <if test="param.payTypes != null and param.payTypes.size() > 0">
+                and pay_type in
+                <foreach collection="param.payTypes" item="payType" open="(" close=")" separator=",">
+                    #{payType}
+                </foreach>
+            </if>
+            <if test="param.payDateBegin != null and param.payDateBegin != ''">
+                and pay_date >= #{param.payDateBegin}
+            </if>
+            <if test="param.payDateEnd != null and param.payDateEnd != ''">
+                and pay_date &lt;= #{param.payDateEnd}
+            </if>
+        </where>
+    </select>
+</mapper>
