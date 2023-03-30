@@ -1,4 +1,6 @@
 jwtSecret: aabbccdd
+logging:
+  config: classpath:logback-spring-${spring.profiles.active}.xml
 server:
   port: 8088
   servlet:
