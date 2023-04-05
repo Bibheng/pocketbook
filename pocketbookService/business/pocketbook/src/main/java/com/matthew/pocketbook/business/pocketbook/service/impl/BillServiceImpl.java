@@ -4,6 +4,7 @@ import com.matthew.pocketbook.business.pocketbook.entity.BillInfo;
 import com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam;
 import com.matthew.pocketbook.business.pocketbook.mapper.BillMapper;
 import com.matthew.pocketbook.business.pocketbook.service.BillService;
+import com.matthew.pocketbook.common.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,14 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<BillInfo> getBillList(BillQueryParam param) {
         return billMapper.queryBillListByParam(param);
+    }
+
+    @Override
+    public int updateBillInfo(BillInfo param) {
+        if (StringUtil.isNotEmpty(param.getBillId())) {
+            return billMapper.updateBillInfo(param);
+        } else {
+            return billMapper.insertBillInfo(param);
+        }
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.matthew.pocketbook.business.pocketbook.mapper.BillMapper">
-
     <select id="queryBillListByParam" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam"
             resultType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
         select
@@ -71,4 +70,36 @@
             </if>
         </where>
     </select>
+
+
+    <update id="updateBillInfo" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
+        update bill set
+        bill_id = #{param.billId}
+        <if test="param.billType != null and param.billType != ''">
+            , bill_type = #{param.billType}
+        </if>
+        <if test="param.money != null and param.money != 0">
+            , money = #{param.money}
+        </if>
+        <if test="param.payer != null and param.payer != ''">
+            , payer = #{param.payer}
+        </if>
+        <if test="param.payee != null and param.payee != ''">
+            , payee = #{param.payee}
+        </if>
+        <if test="param.payType != null and param.payType != ''">
+            , pay_type = #{param.payType}
+        </if>
+        <if test="param.payDate != null and param.payDate != ''">
+            , pay_date = #{param.payDate}
+        </if>
+        where bill_id = #{param.billId}
+    </update>
+
+    <insert id="insertBillInfo">
+        insert into bill (bill_type, money, created_by, payer, payee, pay_type, pay_date)
+        values (#{param.billType}, #{param.money}, #{param.createdBy}, #{param.payer}, #{param.payee}, #{param.payType}, #{param.payDate})
+    </insert>
+
+
 </mapper>

@@ -19,4 +19,8 @@ import java.util.List;
 public interface BillMapper {
 
     List<BillInfo> queryBillListByParam(@Param("param") BillQueryParam param);
+
+    int updateBillInfo(@Param("param") BillInfo param);
+
+    int insertBillInfo(@Param("param") BillInfo param);
 }

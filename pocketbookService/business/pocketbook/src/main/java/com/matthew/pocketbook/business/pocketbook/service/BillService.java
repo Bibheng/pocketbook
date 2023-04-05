@@ -14,4 +14,6 @@ import java.util.List;
  **/
 public interface BillService {
     List<BillInfo> getBillList(BillQueryParam param);
+
+    int updateBillInfo(BillInfo param);
 }

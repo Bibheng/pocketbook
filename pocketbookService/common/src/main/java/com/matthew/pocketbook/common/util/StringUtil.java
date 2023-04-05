@@ -67,4 +67,8 @@ public class StringUtil {
     public static String getUUID(boolean isContainsHyphen) {
         return isContainsHyphen ? UUID.randomUUID().toString() : UUID.randomUUID().toString().replace("-", "");
     }
+
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
 }

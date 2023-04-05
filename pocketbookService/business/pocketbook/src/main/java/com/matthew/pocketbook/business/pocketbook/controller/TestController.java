@@ -1,5 +1,6 @@
 package com.matthew.pocketbook.business.pocketbook.controller;
 
+import com.matthew.pocketbook.business.pocketbook.entity.BillInfo;
 import com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam;
 import com.matthew.pocketbook.business.pocketbook.service.BillService;
 import com.matthew.pocketbook.common.entity.Result;
@@ -26,6 +27,11 @@ public class TestController {
     @PostMapping("/getBillList")
     public Result getBillList(@RequestBody BillQueryParam param) {
         return Result.success(billService.getBillList(param));
+    }
+
+    @PostMapping("/updateBillInfo")
+    public Result updateBillInfo(@RequestBody BillInfo param) {
+        return Result.success(billService.updateBillInfo(param));
     }
 
 }
