@@ -25,9 +25,9 @@ public class BillQueryParam {
     private BigDecimal moneyBegin;
     @ApiModelProperty(value = "金额右区间", example = "500")
     private BigDecimal moneyEnd;
-    @ApiModelProperty(value = "创建时间左区间", example = "2023-01-01 00:00:00")
+    @ApiModelProperty(value = "创建时间左区间", example = "2023-01-01")
     private Date createdDateBegin;
-    @ApiModelProperty(value = "创建时间右区间", example = "2024-01-01 00:00:00")
+    @ApiModelProperty(value = "创建时间右区间", example = "2024-01-01")
     private Date createdDateEnd;
     @ApiModelProperty(value = "创建人-支持多条", example = "[szh,abc]")
     private List<String> createdBys;

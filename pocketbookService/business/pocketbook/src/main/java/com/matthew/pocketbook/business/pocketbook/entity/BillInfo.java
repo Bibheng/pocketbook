@@ -22,7 +22,7 @@ public class BillInfo {
     private String billType;
     @ApiModelProperty(value = "金额", example = "100")
     private BigDecimal money;
-    @ApiModelProperty(value = "创建时间", example = "2023-01-01 00:00:00")
+    @ApiModelProperty(value = "创建时间", example = "2023-01-01")
     private Date createdDate;
     @ApiModelProperty(value = "创建人", example = "szh")
     private String createdBy;
