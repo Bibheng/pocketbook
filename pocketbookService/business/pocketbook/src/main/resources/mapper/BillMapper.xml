@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.matthew.pocketbook.business.pocketbook.mapper.BillMapper">
+
     <select id="queryBillListByParam" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam"
             resultType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
         select
@@ -18,10 +19,10 @@
                 and bill_type = #{param.billType}
             </if>
             <if test="param.moneyBegin != null">
-                and money > #{param.moneyBegin}
+                and money >= #{param.moneyBegin}
             </if>
             <if test="param.moneyEnd != null">
-                and money &lt; #{param.moneyEnd}
+                and money &lt;= #{param.moneyEnd}
             </if>
             <if test="param.createdDateBegin != null">
                 and created_date >= #{param.createdDateBegin}
@@ -71,7 +72,6 @@
         </where>
     </select>
 
-
     <update id="updateBillInfo" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
         update bill set
         bill_id = #{param.billId}
@@ -100,6 +100,5 @@
         insert into bill (bill_type, money, created_by, payer, payee, pay_type, pay_date)
         values (#{param.billType}, #{param.money}, #{param.createdBy}, #{param.payer}, #{param.payee}, #{param.payType}, #{param.payDate})
     </insert>
-
 
 </mapper>

@@ -74,6 +74,11 @@ public class LoginFilter implements Filter {
                 return;
             }
 
+            if (requestUrl.contains("swagger") || requestUrl.contains("v2/api-docs")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            }
+
             // 3、放行公共请求url 比如登录注册等
             if (urlService.isPublicUrl(requestUrl, requestMethod)) {
                 filterChain.doFilter(servletRequest, servletResponse);
@@ -81,7 +86,7 @@ public class LoginFilter implements Filter {
             }
 
             // 4、免登录标识校验
-            if (request.getHeader("Login-Free").equals("1")) {
+            if ("1".equals(request.getHeader("Login-Free"))) {
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }

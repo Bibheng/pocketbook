@@ -5,12 +5,12 @@ import com.matthew.pocketbook.business.user.entity.RegisterParam;
 import com.matthew.pocketbook.business.user.service.LoginService;
 import com.matthew.pocketbook.common.annotation.Group;
 import com.matthew.pocketbook.common.entity.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 /**
  * 用户控制器
@@ -18,30 +18,35 @@ import javax.validation.Valid;
  * @author Matthew
  * @date 2021-01-28 17:12
  **/
+@Api(tags = "登录相关类接口")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     LoginService loginService;
 
-    @PostMapping("/login")
-    public Result login(@RequestBody @Valid LoginParam loginParam) {
+    @ApiOperation(value = "登录")
+    @PostMapping("")
+    public Result login(@RequestBody LoginParam loginParam) {
         return Result.success(loginService.login(loginParam));
     }
 
-    @PutMapping("")
+    @ApiOperation(value = "注册")
+    @PutMapping("register")
     public Result register(@RequestBody @Validated({Group.Add.class}) RegisterParam registerParam) {
         loginService.register(registerParam);
         return Result.success(null);
     }
 
+    @ApiOperation(value = "重置密码")
     @PostMapping("/resetPassword")
     public Result resetPassword(@RequestBody @Validated(Group.Update.class) RegisterParam resetParam) {
         loginService.resetPassword(resetParam);
         return Result.success(null);
     }
 
+    @ApiOperation(value = "发送验证码")
     @GetMapping("/authCode")
     public Result sendAuthCode(@Param("email") String email) {
         loginService.sendAuthCode(email);
