@@ -29,15 +29,15 @@ public class BillQueryParam {
     private Date createdDateBegin;
     @ApiModelProperty(value = "创建时间右区间", example = "2024-01-01")
     private Date createdDateEnd;
-    @ApiModelProperty(value = "创建人-支持多条", example = "[szh,abc]")
+    @ApiModelProperty(value = "创建人-支持多条", example = "[\"szh\",\"abc\"]")
     private List<String> createdBys;
     @ApiModelProperty(value = "创建人-支持模糊", example = "ab")
     private String createdBy;
-    @ApiModelProperty(value = "付款人-支持多条", example = "[szh,abc]")
+    @ApiModelProperty(value = "付款人-支持多条", example = "[\"szh\",\"abc\"]")
     private List<String> payers;
     @ApiModelProperty(value = "付款人-支持模糊", example = "ab")
     private String payer;
-    @ApiModelProperty(value = "收款人-支持多条", example = "[szh,abc]")
+    @ApiModelProperty(value = "收款人-支持多条", example = "[\"szh\",\"abc\"]")
     private List<String> payees;
     @ApiModelProperty(value = "收款人-支持模糊", example = "ab")
     private String payee;
