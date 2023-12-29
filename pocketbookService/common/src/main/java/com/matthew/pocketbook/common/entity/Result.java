@@ -2,6 +2,8 @@ package com.matthew.pocketbook.common.entity;
 
 import com.matthew.pocketbook.common.constant.Constant;
 import com.matthew.pocketbook.common.util.UserContextHolder;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,25 +15,30 @@ import lombok.Data;
  **/
 @Data
 @AllArgsConstructor
-public class Result {
+@ApiModel("返回通用类")
+public class Result<T> {
     /**
      * 状态码
      */
+    @ApiModelProperty("状态码")
     private int code;
     /**
      * 提示
      */
+    @ApiModelProperty("提示")
     private String message;
     /**
      * 数据
      */
-    private Object data;
+    @ApiModelProperty("数据")
+    private T data;
     /**
      * 请求唯一id
      */
+    @ApiModelProperty("请求唯一id")
     private String requestId;
 
-    private Result(int code, String message, Object data) {
+    private Result(int code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;

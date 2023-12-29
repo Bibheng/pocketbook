@@ -1,12 +1,12 @@
 package com.matthew.pocketbook.business.user.controller;
 
 import com.matthew.pocketbook.business.user.entity.LoginParam;
+import com.matthew.pocketbook.business.user.entity.LoginRes;
 import com.matthew.pocketbook.business.user.entity.RegisterParam;
 import com.matthew.pocketbook.business.user.service.LoginService;
 import com.matthew.pocketbook.common.annotation.Group;
 import com.matthew.pocketbook.common.entity.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,8 +27,9 @@ public class LoginController {
     LoginService loginService;
 
     @ApiOperation(value = "登录")
+    @ApiResponse(code = 200, message = "", response = LoginRes.class)
     @PostMapping("")
-    public Result login(@RequestBody LoginParam loginParam) {
+    public Result<LoginRes> login(@RequestBody LoginParam loginParam) {
         return Result.success(loginService.login(loginParam));
     }
 
@@ -48,7 +49,7 @@ public class LoginController {
 
     @ApiOperation(value = "发送验证码")
     @GetMapping("/authCode")
-    public Result sendAuthCode(@Param("email") String email) {
+    public Result sendAuthCode(@Param("email") @ApiParam("邮箱") String email) {
         loginService.sendAuthCode(email);
         return Result.success(null);
     }

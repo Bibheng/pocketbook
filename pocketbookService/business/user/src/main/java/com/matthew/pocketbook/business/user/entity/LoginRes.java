@@ -1,5 +1,7 @@
 package com.matthew.pocketbook.business.user.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -13,25 +15,31 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @Builder
+@ApiModel("登录返回信息")
 public class LoginRes {
     /**
      * token标识
      */
+    @ApiModelProperty("token标识")
     private String token;
     /**
      * 用户id
      */
+    @ApiModelProperty("用户id")
     private int userId;
     /**
      * 用户名称
      */
+    @ApiModelProperty("用户名称")
     private String userName;
     /**
      * 用户email
      */
+    @ApiModelProperty("用户email")
     private String email;
     /**
      * 上次登录时间
      */
+    @ApiModelProperty("上次登录时间")
     private String lastLoginTime;
 }
