@@ -34,4 +34,6 @@ public class BillInfo {
     private String payType;
     @ApiModelProperty(value = "支付日期", example = "2023-01-01")
     private String payDate;
+    @ApiModelProperty(value = "备注", example = "备注")
+    private String remark;
 }

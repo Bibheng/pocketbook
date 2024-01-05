@@ -47,5 +47,7 @@ public class BillQueryParam {
     private String payDateBegin;
     @ApiModelProperty(value = "支付首款日期右区间", example = "2024-01-01")
     private String payDateEnd;
+    @ApiModelProperty(value = "备注", example = "备注")
+    private String remark;
 }
 

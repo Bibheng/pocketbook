@@ -34,4 +34,9 @@ public class BillServiceImpl implements BillService {
             return billMapper.insertBillInfo(param);
         }
     }
+
+    @Override
+    public void delBillInfo(BillInfo param) {
+        billMapper.delBillInfo(param);
+    }
 }

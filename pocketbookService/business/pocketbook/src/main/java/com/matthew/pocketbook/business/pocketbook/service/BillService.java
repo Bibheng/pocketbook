@@ -16,4 +16,6 @@ public interface BillService {
     List<BillInfo> getBillList(BillQueryParam param);
 
     int updateBillInfo(BillInfo param);
+
+    void delBillInfo(BillInfo param);
 }

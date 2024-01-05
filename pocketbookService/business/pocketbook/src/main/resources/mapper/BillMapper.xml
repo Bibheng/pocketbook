@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.matthew.pocketbook.business.pocketbook.mapper.BillMapper">
+    <delete id="delBillInfo">
+        delete from bill where bill_id = #{param.billId}
+    </delete>
 
     <select id="queryBillListByParam" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam"
             resultType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
@@ -69,6 +72,10 @@
             <if test="param.payDateEnd != null and param.payDateEnd != ''">
                 and pay_date &lt;= #{param.payDateEnd}
             </if>
+            <if test="param.remark != null and param.remark != ''">
+                and remark like '%${param.remark}%'
+            </if>
+
         </where>
     </select>
 
@@ -92,6 +99,9 @@
         </if>
         <if test="param.payDate != null and param.payDate != ''">
             , pay_date = #{param.payDate}
+        </if>
+        <if test="param.payType != null and param.payType != ''">
+            , remark = #{param.remark}
         </if>
         where bill_id = #{param.billId}
     </update>

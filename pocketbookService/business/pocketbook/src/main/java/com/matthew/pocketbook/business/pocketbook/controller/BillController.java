@@ -41,4 +41,12 @@ public class BillController {
         return Result.success(billService.updateBillInfo(param));
     }
 
+    @ApiOperation(value = "删除修改账单")
+    @ApiResponse(code = Constant.SUCCESS_CODE, message = "", response = Integer.class)
+    @PostMapping("/updateBillInfo")
+    public Result delBillInfo(@RequestBody BillInfo param) {
+        billService.delBillInfo(param);
+        return Result.success(null);
+    }
+
 }

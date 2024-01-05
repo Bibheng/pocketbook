@@ -23,4 +23,6 @@ public interface BillMapper {
     int updateBillInfo(@Param("param") BillInfo param);
 
     int insertBillInfo(@Param("param") BillInfo param);
+
+    void delBillInfo(@Param("param") BillInfo param);
 }
