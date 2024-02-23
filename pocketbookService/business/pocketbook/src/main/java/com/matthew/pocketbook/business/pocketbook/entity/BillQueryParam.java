@@ -29,6 +29,8 @@ public class BillQueryParam {
     private Date createdDateBegin;
     @ApiModelProperty(value = "创建时间右区间", example = "2024-01-01")
     private Date createdDateEnd;
+    @ApiModelProperty(value = "关系人-支持模糊", example = "ab")
+    private String relatedBy;
     @ApiModelProperty(value = "创建人-支持多条", example = "[\"szh\",\"abc\"]")
     private List<String> createdBys;
     @ApiModelProperty(value = "创建人-支持模糊", example = "ab")
@@ -49,5 +51,7 @@ public class BillQueryParam {
     private String payDateEnd;
     @ApiModelProperty(value = "备注", example = "备注")
     private String remark;
+    @ApiModelProperty(value = "筛选时间", example = "2023-01-01")
+    private String date;
 }
 

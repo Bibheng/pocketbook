@@ -6,7 +6,7 @@ import com.matthew.pocketbook.business.user.entity.RegisterParam;
 import com.matthew.pocketbook.business.user.entity.User;
 import com.matthew.pocketbook.business.user.service.LoginService;
 import com.matthew.pocketbook.business.user.service.UserService;
-import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.constant.CommonConstant;
 import com.matthew.pocketbook.common.entity.MailInfo;
 import com.matthew.pocketbook.common.exception.CustomException;
 import com.matthew.pocketbook.common.util.*;
@@ -38,8 +38,8 @@ public class LoginServiceImpl implements LoginService {
         }
         // 根据用户id生成token
         Map<String, Integer> map = new HashMap<>(1);
-        map.put(Constant.MDC_USER_ID, user.getUserId());
-        String token = JwtUtil.encode(map, Constant.SECRET, param.isRememberMe() ? Constant.LONG_EXPIRE_TIME : Constant.SHORT_EXPIRE_TIME);
+        map.put(CommonConstant.MDC_USER_ID, user.getUserId());
+        String token = JwtUtil.encode(map, CommonConstant.SECRET, param.isRememberMe() ? CommonConstant.LONG_EXPIRE_TIME : CommonConstant.SHORT_EXPIRE_TIME);
 
         userService.updateLastLoginTime(user.getUserId(), System.currentTimeMillis());
         return LoginRes.builder()
@@ -104,12 +104,12 @@ public class LoginServiceImpl implements LoginService {
         mailInfo.setSubject("记账本 验证码");
         String authCode = StringUtil.getRandomString(6, 2);
         mailInfo.setContent("记账本，本次验证码：" + authCode);
-        if (Constant.IS_DEV) {
+        if (CommonConstant.IS_DEV) {
             authCode = "123456";
         } else {
             MailUtil.sendTextMail(mailInfo);
         }
-        RedisUtil.set(getResetAuthCodeKey(email), authCode, Constant.RESET_PASSWORD_EXPIRE_TIME);
+        RedisUtil.set(getResetAuthCodeKey(email), authCode, CommonConstant.RESET_PASSWORD_EXPIRE_TIME);
     }
 
 }

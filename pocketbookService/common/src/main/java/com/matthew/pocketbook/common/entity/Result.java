@@ -1,6 +1,6 @@
 package com.matthew.pocketbook.common.entity;
 
-import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.constant.CommonConstant;
 import com.matthew.pocketbook.common.util.UserContextHolder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -46,15 +46,15 @@ public class Result<T> {
     }
 
     public static Result unAuth() {
-        return new Result(Constant.UNAUTHORIZED_CODE, "用户未登录", null);
+        return new Result(CommonConstant.UNAUTHORIZED_CODE, "用户未登录", null);
     }
 
     public static Result success(Object data) {
-        return new Result(Constant.SUCCESS_CODE, "success", data);
+        return new Result(CommonConstant.SUCCESS_CODE, "success", data);
     }
 
     public static Result failed(String message) {
-        return new Result(Constant.ERROR_CODE, message, null);
+        return new Result(CommonConstant.ERROR_CODE, message, null);
     }
 
 }

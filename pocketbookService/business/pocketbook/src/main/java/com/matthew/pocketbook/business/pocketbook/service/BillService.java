@@ -2,6 +2,7 @@ package com.matthew.pocketbook.business.pocketbook.service;
 
 import com.matthew.pocketbook.business.pocketbook.entity.BillInfo;
 import com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam;
+import com.matthew.pocketbook.business.pocketbook.entity.CardInfo;
 import com.matthew.pocketbook.common.entity.Result;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface BillService {
     int updateBillInfo(BillInfo param);
 
     void delBillInfo(BillInfo param);
+
+    CardInfo getCardData(BillQueryParam param);
 }

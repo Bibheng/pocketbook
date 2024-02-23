@@ -1,6 +1,6 @@
 package com.matthew.pocketbook.common.util;
 
-import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.constant.CommonConstant;
 import org.slf4j.MDC;
 
 /**
@@ -11,25 +11,25 @@ import org.slf4j.MDC;
  **/
 public class MDCUtil {
     public static void putUserId(String userId) {
-        MDC.put(Constant.MDC_USER_ID, userId);
+        MDC.put(CommonConstant.MDC_USER_ID, userId);
     }
     public static void putRequestId(String requestId) {
-        MDC.put(Constant.MDC_REQUEST_ID, requestId);
+        MDC.put(CommonConstant.MDC_REQUEST_ID, requestId);
     }
 
     public static void removeUserId() {
-        MDC.remove(Constant.MDC_USER_ID);
+        MDC.remove(CommonConstant.MDC_USER_ID);
     }
     public static void removeRequestId() {
-        MDC.remove(Constant.MDC_REQUEST_ID);
+        MDC.remove(CommonConstant.MDC_REQUEST_ID);
     }
 
     public static String getUserId() {
-        return MDC.get(Constant.MDC_USER_ID);
+        return MDC.get(CommonConstant.MDC_USER_ID);
     }
 
     public static String getRequestId() {
-        return MDC.get(Constant.MDC_REQUEST_ID);
+        return MDC.get(CommonConstant.MDC_REQUEST_ID);
     }
 
     public static String get(String key) {

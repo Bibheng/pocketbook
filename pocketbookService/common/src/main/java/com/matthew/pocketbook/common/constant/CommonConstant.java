@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-01-28 17:28
  **/
 @Component
-public class Constant {
+public class CommonConstant {
 
     /*环境相关*/
     /**

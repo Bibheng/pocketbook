@@ -1,7 +1,7 @@
 package com.matthew.pocketbook.common.util;
 
 import com.alibaba.fastjson.JSON;
-import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.constant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ public class RedisUtil {
      * @date 2021-02-22 16:14
      */
     public static void set(String key, String value) {
-        set(key, value, Constant.DEFAULT_EXPIRE_TIME);
+        set(key, value, CommonConstant.DEFAULT_EXPIRE_TIME);
     }
 
     /**

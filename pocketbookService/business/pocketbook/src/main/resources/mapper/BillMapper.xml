@@ -42,6 +42,9 @@
             <if test="param.createdBy != null and param.createdBy != ''">
                 and created_by like '%${param.createdBy}%'
             </if>
+            <if test="param.relatedBy != null and param.relatedBy != ''">
+                and (payer like '%${param.relatedBy}%' or payee like '%${param.relatedBy}%')
+            </if>
             <if test="param.payers != null and param.payers.size() > 0">
                 and payer in
                 <foreach collection="param.payers" item="payer" open="(" close=")" separator=",">
@@ -77,6 +80,28 @@
             </if>
 
         </where>
+    </select>
+    <select id="getSumBillInfo" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillQueryParam"
+            resultType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">
+        select
+        bill_type,
+        sum(money) money
+        from bill
+        <where>
+            <if test="param.billType != null and param.billType != ''">
+                and bill_type = #{param.billType}
+            </if>
+            <if test="param.payDateBegin != null and param.payDateBegin != ''">
+                and pay_date >= #{param.payDateBegin}
+            </if>
+            <if test="param.payDateEnd != null and param.payDateEnd != ''">
+                and pay_date &lt;= #{param.payDateEnd}
+            </if>
+            <if test="param.relatedBy != null and param.relatedBy != ''">
+                and (payer = #{param.relatedBy} or payee = #{param.relatedBy})
+            </if>
+        </where>
+        group by bill_type
     </select>
 
     <update id="updateBillInfo" parameterType="com.matthew.pocketbook.business.pocketbook.entity.BillInfo">

@@ -25,4 +25,6 @@ public interface BillMapper {
     int insertBillInfo(@Param("param") BillInfo param);
 
     void delBillInfo(@Param("param") BillInfo param);
+
+    List<BillInfo> getSumBillInfo(@Param("param") BillQueryParam queryParam);
 }

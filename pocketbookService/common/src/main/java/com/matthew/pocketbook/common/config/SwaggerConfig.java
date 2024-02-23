@@ -1,6 +1,6 @@
 package com.matthew.pocketbook.common.config;
 
-import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.constant.CommonConstant;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +25,9 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         List<ResponseMessage> responseMessages = Arrays.asList(
-            new ResponseMessageBuilder().code(Constant.SUCCESS_CODE).message("成功").build(),
-            new ResponseMessageBuilder().code(Constant.ERROR_CODE).message("失败").build(),
-            new ResponseMessageBuilder().code(Constant.UNAUTHORIZED_CODE).message("未登录").build()
+            new ResponseMessageBuilder().code(CommonConstant.SUCCESS_CODE).message("成功").build(),
+            new ResponseMessageBuilder().code(CommonConstant.ERROR_CODE).message("失败").build(),
+            new ResponseMessageBuilder().code(CommonConstant.UNAUTHORIZED_CODE).message("未登录").build()
         );
 
         return new Docket(DocumentationType.SWAGGER_2)  // DocumentationType.SWAGGER_2 固定的，代表swagger2

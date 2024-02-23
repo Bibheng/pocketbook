@@ -2,7 +2,7 @@ package com.matthew.pocketbook.common.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.matthew.pocketbook.common.biz.UrlService;
-import com.matthew.pocketbook.common.constant.Constant;
+import com.matthew.pocketbook.common.constant.CommonConstant;
 import com.matthew.pocketbook.common.entity.Result;
 import com.matthew.pocketbook.common.entity.UserContext;
 import com.matthew.pocketbook.common.util.JwtUtil;
@@ -10,7 +10,6 @@ import com.matthew.pocketbook.common.util.MDCUtil;
 import com.matthew.pocketbook.common.util.StringUtil;
 import com.matthew.pocketbook.common.util.UserContextHolder;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String requestUrl = request.getRequestURI().replace(Constant.URL_PREFIX, "");
+        String requestUrl = request.getRequestURI().replace(CommonConstant.URL_PREFIX, "");
 
         // 指定允许其他域名访问
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -50,7 +49,7 @@ public class LoginFilter implements Filter {
         // 响应类型
         response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,OPTIONS,DELETE");
         // 响应头设置
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type,jwt-token");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type,jwt-token,Login-Free");
 
 
         try {
@@ -92,7 +91,7 @@ public class LoginFilter implements Filter {
             }
 
             // 5、校验jwt是否合法
-            if (JwtUtil.checkUserJwt(request.getHeader(Constant.JWT_KEY))) {
+            if (JwtUtil.checkUserJwt(request.getHeader(CommonConstant.JWT_KEY))) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 response.setStatus(HttpStatus.OK.value());
@@ -101,8 +100,8 @@ public class LoginFilter implements Filter {
                 response.getWriter().write(JSON.toJSONString(Result.unAuth()));
             }
         } finally {
-            UserContextHolder.remove();// 执行完ser
-            MDCUtil.clear();// vlet后释放threadLocal，避免内存溢出
+            UserContextHolder.remove();// 执行完servlet后释放threadLocal，避免内存溢出
+            MDCUtil.clear();
         }
     }
 

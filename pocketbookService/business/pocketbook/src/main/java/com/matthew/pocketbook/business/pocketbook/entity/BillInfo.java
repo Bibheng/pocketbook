@@ -21,7 +21,7 @@ public class BillInfo {
     @ApiModelProperty(value = "账单类型，01支出/02收入", example = "01")
     private String billType;
     @ApiModelProperty(value = "金额", example = "100")
-    private BigDecimal money;
+    private BigDecimal money = new BigDecimal(0);
     @ApiModelProperty(value = "创建时间", example = "2023-01-01")
     private Date createdDate;
     @ApiModelProperty(value = "创建人", example = "szh")
