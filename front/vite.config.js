@@ -11,9 +11,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  // server: {
-  //   proxy: {
-  //     '/pocketbook/api': 'http://127.0.0.1:8088/pocketbook/api'
-  //   }
-  // }
+  server: {
+    host: '0.0.0.0',
+    port: '9000',
+    https: false,
+    proxy: {
+      '/pocketbook/api': {
+        target: 'http://127.0.0.1:8088',
+        changeOrigin: true, // 支持跨域
+      }
+    }
+  }
 })
